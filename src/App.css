@@ -1,0 +1,7 @@
+.MessagePage {
+  display: flex;
+}
+
+.MessageDisplay, .MessageForm {
+  flex-grow: 1;
+}
