@@ -7,7 +7,7 @@ Here is a simple test of your understanding of React components, async API calls
 The test code will be run from the root of the repository and the Sendsei API Key will be provided to you
 
 ```
-REACT_APP_API_KEY=e7343be95143d3053aa76b694b839c578c958b40 yarn start
+REACT_APP_API_KEY=xxx npm start
 ```
 
 It is intended for this test to take roughly an hour to complete. You are free to take your time with it though be mindful of keeping it simple. This is not a test of your design skills.
