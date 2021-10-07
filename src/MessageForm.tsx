@@ -1,20 +1,27 @@
 import React from "react";
 import './MessageForm.css';
 
-interface Props {}
+import { sendSMS } from './service';
+import { Message } from './MessagePage';
 
-const MessageForm: React.FC<Props> = () => {
+interface Props {
+  updateMessage: (t: Message) => void,
+}
+
+const MessageForm: React.FC<Props> = ({ updateMessage }) => {
+  const [sender] = React.useState("Enterprise");
   const [recipient, setRecipient] = React.useState("");
   const [message, setMessage] = React.useState("");
-
+  
   const [formValid, setFormValid] = React.useState(false);
 
-  // assume max length of single sms text is 160 chars
+  // assuming max length of single sms text is 160 chars
+  // 3 * 160 would be 3 sms worth of text
   const MESSAGE_MAX_LENGTH = 3 * 160;
 
   const validateMessage = (e: any) => {
-    const {name, value} = e.target;
-    if(name === 'message' && value.length > MESSAGE_MAX_LENGTH) {
+    const { name, value } = e.target;
+    if(name === 'message' && value.length < MESSAGE_MAX_LENGTH) {
       setFormValid(true);
     } else {
       setFormValid(false);
@@ -25,7 +32,9 @@ const MessageForm: React.FC<Props> = () => {
   const handleSubmit = (e: React.FormEvent)  => {
     e.preventDefault();
     if(formValid) {
-      console.log('form submitted');
+      sendSMS(sender, recipient, message)
+        .then((res: any) => updateMessage(res));
+
       setFormValid(false);
     }
   };
@@ -41,7 +50,7 @@ const MessageForm: React.FC<Props> = () => {
             id="sender" 
             name="sender"
             type="text" 
-            value="Enterprise" />
+            value={sender} />
         </div>
         <div>
           <label htmlFor="recipient">Recipient:</label>
