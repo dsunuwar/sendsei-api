@@ -15,9 +15,7 @@ const MessageForm: React.FC<Props> = ({ updateMessage }) => {
   
   const [formValid, setFormValid] = React.useState(false);
 
-  // assuming max length of single sms text is 160 chars
-  // 3 * 160 would be 3 sms worth of text
-  const MESSAGE_MAX_LENGTH = 3 * 160;
+  const MESSAGE_MAX_LENGTH = 5;
 
   const validateMessage = (e: any) => {
     const { name, value } = e.target;
@@ -44,7 +42,7 @@ const MessageForm: React.FC<Props> = ({ updateMessage }) => {
       <header>Send SMS</header>
       <form noValidate onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="">Sender:</label>
+          <label htmlFor="sender">Sender:</label>
           <input 
             readOnly
             id="sender" 
@@ -74,7 +72,11 @@ const MessageForm: React.FC<Props> = ({ updateMessage }) => {
               onChange={(e) => validateMessage(e)}
               />
         </div>        
-        <input type="submit" value="Submit" disabled={!formValid}/>
+        <input 
+          type="submit" 
+          value="Submit" 
+          disabled={!formValid}
+        />
       </form>
     </div>
   );
