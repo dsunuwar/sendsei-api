@@ -4,17 +4,19 @@ import { Message } from './MessagePage';
 type SendSMSResponse = Promise<Message|void>;
 
 const postMessage = async (url='', data = {}) => {
-  const res = await fetch(url, {
+  const options = {
     method: 'POST',
     headers: {
       'x-api-key': process.env.REACT_APP_API_KEY || '',
-      'Content-Type': 'application/json', 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=UTF', 
     },
     body: JSON.stringify(data),
-    redirect: 'follow',
-  });
+  };
 
-return res.json();
+  const res = await fetch(url, options);
+
+  return res.json();
 }
 
 export const sendSMS = (
