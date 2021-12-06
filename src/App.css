@@ -2,6 +2,13 @@
   display: flex;
 }
 
-.MessageDisplay, .MessageForm {
+.MessagePage header {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.MessageDisplay,
+.MessageForm {
   flex-grow: 1;
+  padding: 15px;
 }
